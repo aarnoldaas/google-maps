@@ -1,11 +1,12 @@
 const ZOOM_LEVEL_TO_PROPERTY = 15;
 const DEFAULT_MAP_ZOOM = 8;
+let wixCodeInitialized = false;
 
 let map;
 let markers = [];
 
-window.onmessage = (event = {data: {properties: [{lat: 54, lng: 25, area: 'area 1'}, {lat: 54.5, lng: 25.5, area: 'area 2'}]}}) => {
-  console.log(event);
+window.onmessage = (event) => {
+  wixCodeInitialized = true;
   removeMarkers();
   if (event.data.properties) {
     event.data.properties.forEach((property) => {
@@ -61,6 +62,15 @@ function getTooltip(property) {
   });
 }
 
+function notifyWixCodeAboutLoad() {
+  if (!wixCodeInitialized) {
+    setTimeout(() => {
+      console.log('labas');
+      !wixCodeInitialized && window.parent.postMessage('MAP_LOADED', '*') && notifyWixCodeAboutLoad();
+    }, 500);
+  }
+}
+
 function initMap() {
   let styledMapType = new google.maps.StyledMapType(mapStyle, 'greyMap');
 
@@ -75,10 +85,7 @@ function initMap() {
   });
   map.mapTypes.set('greyMap', styledMapType);
   map.setMapTypeId('greyMap');
-  console.log(window.parent);
-  setTimeout(() => {
-    window.parent.postMessage('MAP_LOADED', '*');
-  }, 2000);
+  notifyWixCodeAboutLoad();
 }
 
 let mapStyle = [
