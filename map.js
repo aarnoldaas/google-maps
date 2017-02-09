@@ -65,9 +65,11 @@ function getTooltip(property) {
 function notifyWixCodeAboutLoad() {
   if (!wixCodeInitialized) {
     setTimeout(() => {
-      window.parent.postMessage('MAP_LOADED', '*');
-      notifyWixCodeAboutLoad();
-    }, 200);
+      if (!wixCodeInitialized) {
+        window.parent.postMessage('MAP_LOADED', '*');
+        notifyWixCodeAboutLoad();
+      }
+    }, 500);
   }
 }
 
