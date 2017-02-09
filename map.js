@@ -4,7 +4,7 @@ const DEFAULT_MAP_ZOOM = 8;
 let map;
 let markers = [];
 
-window.onmessage = (event = {data: {properties: [{lat: 54, lng: 25, description: 'Description 1'}, {lat: 54.5, lng: 25.5, description: 'Description 2'}]}}) => {
+window.onmessage = (event = {data: {properties: [{lat: 54, lng: 25, area: 'area 1'}, {lat: 54.5, lng: 25.5, area: 'area 2'}]}}) => {
   event.data.properties.forEach((property) => {
     addMarker(property);
   });
@@ -50,7 +50,7 @@ function removeMarkers() {
 }
 
 function getTooltip(property) {
-  const content = `<div>${property.description}</div>`;
+  const content = `<div>${property.area}</div>`;
   return new google.maps.InfoWindow({
     content
   });
