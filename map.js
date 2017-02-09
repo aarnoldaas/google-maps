@@ -65,9 +65,10 @@ function getTooltip(property) {
 function notifyWixCodeAboutLoad() {
   if (!wixCodeInitialized) {
     setTimeout(() => {
-      console.log('labas');
-      !wixCodeInitialized && window.parent.postMessage('MAP_LOADED', '*') && notifyWixCodeAboutLoad();
-    }, 500);
+      notifyWixCodeAboutLoad();
+    }, 200);
+  } else {
+    window.parent.postMessage('MAP_LOADED', '*');
   }
 }
 
