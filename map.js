@@ -75,7 +75,10 @@ function initMap() {
   });
   map.mapTypes.set('greyMap', styledMapType);
   map.setMapTypeId('greyMap');
-  window.parent.postMessage('MAP_LOADED', '*');
+  console.log(window.parent);
+  setTimeout(() => {
+    window.parent.postMessage('MAP_LOADED', '*');
+  }, 2000);
 }
 
 let mapStyle = [
