@@ -284,14 +284,6 @@ const properties = [
     price: 1223000
   },
   {
-    lat: 51.5413,
-    lng: 0.1791,
-    area: "South Hampstead",
-    title: 'This is title',
-    number_of_bedrooms: 1,
-    price: 120021000000
-  },
-  {
     lat: 51.5556,
     lng: 0.1762,
     area: "Hampstead",
