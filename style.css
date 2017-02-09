@@ -3,3 +3,19 @@ html, body, #map {
     width: 100%;
     height: 100%;
 }
+
+.price {
+    font: normal normal normal 22px/1.4em avenir-lt-w01_35-light1475496,sans-serif;
+    color: #414141;
+}
+
+.description,
+.amenities {
+    font: normal normal normal 12px/1.4em avenir-lt-w01_35-light1475496, sans-serif;
+    color: #414141;
+}
+
+.area {
+    font: normal normal normal 12px/1.4em avenir-lt-w01_35-light1475496, sans-serif;
+    color: #C7C7C7;
+}

@@ -34,7 +34,7 @@ function addMarker(property) {
     tooltip.close(map, marker);
   });
   google.maps.event.addListener(marker, 'click', () => {
-    window.parent.postMessage({ type: 'MARKER_CLICKED', id: property.id }, '*');
+    window.parent.postMessage({ type: 'MARKER_CLICKED', id: property._id }, '*');
   });
   markers.push(marker);
   zoomToAllProperties();
@@ -61,7 +61,11 @@ function removeMarkers() {
 }
 
 function getTooltip(property) {
-  const content = `<div>${property.area}</div>`;
+  const content = `<div>$ ${property.price}</div>
+                   <div>${property.title}</div>
+                   <div>${property.area}</div>
+                   <div><span>${property.number_of_bedrooms} Bed</span><span>1 Bath</span></div>
+                  `;
   return new google.maps.InfoWindow({
     content
   });
@@ -78,7 +82,7 @@ function notifyWixCodeAboutLoad() {
     }, 500);
   }
   if (counter > 5) {
-    onmessage({data:{type: 'SHOW_PROPERTIES', properties: [{"lat":51.5189,"lng":0.1499,"area":"Marylebone"},{"lat":51.5413,"lng":0.1791,"area":"South Hampstead"},{"lat":51.5384,"lng":0.155,"area":"PrimroseHill"},{"lat":51.5413,"lng":0.1791,"area":"South Hampstead"},{"lat":51.5556,"lng":0.1762,"area":"Hampstead"},{"lat":51.5502,"lng":0.1663,"area":"Belsize Park"}]}});
+    onmessage({data:{type: 'SHOW_PROPERTIES', properties}});
   }
 }
 
@@ -254,3 +258,5 @@ let mapStyle = [
     ]
   }
 ];
+
+const properties = [{"lat":51.5189,"lng":0.1499,"area":"Marylebone"},{"lat":51.5413,"lng":0.1791,"area":"South Hampstead"},{"lat":51.5384,"lng":0.155,"area":"PrimroseHill"},{"lat":51.5413,"lng":0.1791,"area":"South Hampstead"},{"lat":51.5556,"lng":0.1762,"area":"Hampstead"},{"lat":51.5502,"lng":0.1663,"area":"Belsize Park"}];
