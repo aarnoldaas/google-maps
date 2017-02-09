@@ -1,3 +1,6 @@
+const ZOOM_LEVEL_TO_PROPERTY = 15;
+const DEFAULT_MAP_ZOOM = 8;
+
 let map;
 let markers = [];
 
@@ -26,6 +29,19 @@ function addMarker(property) {
   markers.push(marker);
 }
 
+function zoomToProperty(property) {
+  map.panTo({lat: property.lat, lng: property.lng});
+  map.setZoom(ZOOM_LEVEL_TO_PROPERTY);
+}
+
+function zoomToAllProperties() {
+  let bounds = new google.maps.LatLngBounds();
+  markers.forEach((marker) => {
+    bounds.extend(marker.getPosition());
+  });
+  map.fitBounds(bounds);
+}
+
 function removeMarkers() {
   markers.forEach(function(marker) {
     marker.setMap(null);
@@ -34,7 +50,6 @@ function removeMarkers() {
 }
 
 function getTooltip(property) {
-  console.log(property.description);
   const content = `<div id="tooltip-content" class="red-background">${property.description}</div>`;
   return new google.maps.InfoWindow({
     content
@@ -47,7 +62,7 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 54.397, lng: 25.644},
     scrollwheel: true,
-    zoom: 8,
+    zoom: DEFAULT_MAP_ZOOM,
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
         'greyMap']
