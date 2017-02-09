@@ -21,7 +21,7 @@ window.onmessage = (event) => {
 };
 
 function addMarker(property) {
-  let marker  = new google.maps.Marker({
+  let marker = new google.maps.Marker({
     position: { lat: property.lat, lng: property.lng },
     map,
     title: property.title
@@ -41,7 +41,7 @@ function addMarker(property) {
 }
 
 function zoomToProperty(property) {
-  map.panTo({lat: property.lat, lng: property.lng});
+  map.panTo({ lat: property.lat, lng: property.lng });
   map.setZoom(ZOOM_LEVEL_TO_PROPERTY);
 }
 
@@ -54,18 +54,17 @@ function zoomToAllProperties() {
 }
 
 function removeMarkers() {
-  markers.forEach(function(marker) {
-    marker.setMap(null);
-  });
+  markers.forEach((marker) => marker.setMap(null));
   markers = [];
 }
 
 function getTooltip(property) {
-  const content = `<div>$ ${property.price}</div>
-                   <div>${property.title}</div>
-                   <div>${property.area}</div>
-                   <div><span>${property.number_of_bedrooms} Bed</span><span>1 Bath</span></div>
-                  `;
+  const content = `<div class="property-tooltip-container">
+                     <div class="price">$<span class="price-number">${property.price}</span></div>
+                     <div class="description">${property.title}</div>
+                     <div class="area">${property.area}</div>
+                     <div class="amenities"><div>${property.number_of_bedrooms} Bed</div><div>1 Bath</div></div>
+                   </div>`;
   return new google.maps.InfoWindow({
     content
   });
@@ -82,7 +81,7 @@ function notifyWixCodeAboutLoad() {
     }, 500);
   }
   if (counter > 5) {
-    onmessage({data:{type: 'SHOW_PROPERTIES', properties}});
+    onmessage({ data: { type: 'SHOW_PROPERTIES', properties } });
   }
 }
 
@@ -259,4 +258,52 @@ let mapStyle = [
   }
 ];
 
-const properties = [{"lat":51.5189,"lng":0.1499,"area":"Marylebone"},{"lat":51.5413,"lng":0.1791,"area":"South Hampstead"},{"lat":51.5384,"lng":0.155,"area":"PrimroseHill"},{"lat":51.5413,"lng":0.1791,"area":"South Hampstead"},{"lat":51.5556,"lng":0.1762,"area":"Hampstead"},{"lat":51.5502,"lng":0.1663,"area":"Belsize Park"}];
+const properties = [
+  {
+    lat: 51.5189,
+    lng: 0.1499,
+    title: 'This is title',
+    number_of_bedrooms: 1,
+    area: "Marylebone",
+    price: 1500000
+  },
+  {
+    lat: 51.5413,
+    lng: 0.1791,
+    area: "356 Broadway, Unit 2A",
+    title: 'Luxury 2 Bedroom Duplex Apartment in Greenwich',
+    number_of_bedrooms: 1,
+    price: '2,800'
+  },
+  {
+    lat: 51.5384,
+    lng: 0.155,
+    area: "PrimroseHill",
+    title: 'This is title',
+    number_of_bedrooms: 1,
+    price: 1223000
+  },
+  {
+    lat: 51.5413,
+    lng: 0.1791,
+    area: "South Hampstead",
+    title: 'This is title',
+    number_of_bedrooms: 1,
+    price: 120021000000
+  },
+  {
+    lat: 51.5556,
+    lng: 0.1762,
+    area: "Hampstead",
+    title: 'This is title',
+    number_of_bedrooms: 1,
+    price: 214200000
+  },
+  {
+    lat: 51.5502,
+    lng: 0.1663,
+    area: "Belsize Park",
+    title: 'This is title',
+    number_of_bedrooms: 1,
+    price: 4125460000
+  }];
