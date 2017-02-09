@@ -2,9 +2,9 @@ const ZOOM_LEVEL_TO_PROPERTY = 15;
 let wixCodeInitialized = false;
 let map = false;
 let markers = [];
+let counter = 0;
 
 window.onmessage = (event) => {
-  console.log(event);
   switch (event.data.type) {
     case 'SHOW_PROPERTIES':
       if (!map) {
@@ -68,7 +68,7 @@ function getTooltip(property) {
 }
 
 function notifyWixCodeAboutLoad() {
-  console.log('notify');
+  counter++;
   if (!wixCodeInitialized) {
     setTimeout(() => {
       if (!wixCodeInitialized) {
@@ -76,6 +76,9 @@ function notifyWixCodeAboutLoad() {
         notifyWixCodeAboutLoad();
       }
     }, 500);
+  }
+  if (counter > 5) {
+    onmessage({data:{type: 'SHOW_PROPERTIES', properties: [{"lat":51.5189,"lng":0.1499,"area":"Marylebone"},{"lat":51.5413,"lng":0.1791,"area":"South Hampstead"},{"lat":51.5384,"lng":0.155,"area":"PrimroseHill"},{"lat":51.5413,"lng":0.1791,"area":"South Hampstead"},{"lat":51.5556,"lng":0.1762,"area":"Hampstead"},{"lat":51.5502,"lng":0.1663,"area":"Belsize Park"}]}});
   }
 }
 
