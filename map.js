@@ -72,7 +72,7 @@ function notifyWixCodeAboutLoad() {
   if (!wixCodeInitialized) {
     setTimeout(() => {
       if (!wixCodeInitialized) {
-        window.parent.postMessage('MAP_LOADED', '*');
+        window.parent.postMessage({ type: 'MAP_LOADED' }, '*');
         notifyWixCodeAboutLoad();
       }
     }, 500);
