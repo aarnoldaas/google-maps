@@ -34,7 +34,7 @@ function addMarker(property) {
     tooltip.close(map, marker);
   });
   google.maps.event.addListener(marker, 'click', () => {
-    window.parent.postMessage({ type: 'MARKER_CLICKED', id: property.id });
+    window.parent.postMessage({ type: 'MARKER_CLICKED', id: property.id }, '*');
   });
   markers.push(marker);
   zoomToAllProperties();
