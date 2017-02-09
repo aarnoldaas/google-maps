@@ -4,18 +4,19 @@ let map = false;
 let markers = [];
 
 window.onmessage = (event) => {
-
-  if (!map) {
-    initMap();
+  switch (event.data.type) {
+    case 'SHOW_PROPERTIES':
+      if (!map) {
+        initMap();
+      }
+      removeMarkers();
+      if (event.data.properties) {
+        event.data.properties.forEach((property) => {
+          addMarker(property);
+        });
+      }
+      wixCodeInitialized = true;
   }
-
-  removeMarkers();
-  if (event.data.properties) {
-    event.data.properties.forEach((property) => {
-      addMarker(property);
-    });
-  }
-  wixCodeInitialized = true;
 };
 
 function addMarker(property) {
@@ -32,7 +33,7 @@ function addMarker(property) {
     tooltip.close(map, marker);
   });
   google.maps.event.addListener(marker, 'click', () => {
-    console.log(property);
+    window.parent.postMessage({ type: 'MARKER_CLICKED', id: property.id });
   });
   markers.push(marker);
   zoomToAllProperties();
