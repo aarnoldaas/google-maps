@@ -5,6 +5,7 @@ let map;
 let markers = [];
 
 window.onmessage = (event = {data: {properties: [{lat: 54, lng: 25, area: 'area 1'}, {lat: 54.5, lng: 25.5, area: 'area 2'}]}}) => {
+  console.log(event);
   removeMarkers();
   event.data.properties.forEach((property) => {
     addMarker(property);
