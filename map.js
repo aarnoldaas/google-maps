@@ -61,7 +61,7 @@ function initMap() {
 
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 54.397, lng: 25.644},
-    scrollwheel: true,
+    scrollwheel: false,
     zoom: DEFAULT_MAP_ZOOM,
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
