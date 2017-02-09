@@ -5,6 +5,7 @@ let map;
 let markers = [];
 
 window.onmessage = (event = {data: {properties: [{lat: 54, lng: 25, area: 'area 1'}, {lat: 54.5, lng: 25.5, area: 'area 2'}]}}) => {
+  removeMarkers();
   event.data.properties.forEach((property) => {
     addMarker(property);
   });
@@ -27,6 +28,7 @@ function addMarker(property) {
     console.log(property);
   });
   markers.push(marker);
+  zoomToAllProperties();
 }
 
 function zoomToProperty(property) {
