@@ -4,6 +4,7 @@ let map = false;
 let markers = [];
 
 window.onmessage = (event) => {
+  console.log(event);
   switch (event.data.type) {
     case 'SHOW_PROPERTIES':
       if (!map) {
@@ -67,6 +68,7 @@ function getTooltip(property) {
 }
 
 function notifyWixCodeAboutLoad() {
+  console.log('notify');
   if (!wixCodeInitialized) {
     setTimeout(() => {
       if (!wixCodeInitialized) {
