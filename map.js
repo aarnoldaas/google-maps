@@ -5,11 +5,12 @@ let map;
 let markers = [];
 
 window.onmessage = (event = {data: {properties: [{lat: 54, lng: 25, area: 'area 1'}, {lat: 54.5, lng: 25.5, area: 'area 2'}]}}) => {
-  console.log(event);
   removeMarkers();
-  event.data.properties.forEach((property) => {
-    addMarker(property);
-  });
+  if (event.data.properties) {
+    event.data.properties.forEach((property) => {
+      addMarker(property);
+    });
+  }
 };
 
 function addMarker(property) {
@@ -73,7 +74,7 @@ function initMap() {
   });
   map.mapTypes.set('greyMap', styledMapType);
   map.setMapTypeId('greyMap');
-  onmessage();
+  window.parent.postMessage('MAP_LOADED', '*');
 }
 
 let mapStyle = [
