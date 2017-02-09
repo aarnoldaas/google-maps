@@ -1,18 +1,21 @@
 const ZOOM_LEVEL_TO_PROPERTY = 15;
-const DEFAULT_MAP_ZOOM = 8;
 let wixCodeInitialized = false;
-
-let map;
+let map = false;
 let markers = [];
 
 window.onmessage = (event) => {
-  wixCodeInitialized = true;
+
+  if (!map) {
+    initMap();
+  }
+
   removeMarkers();
   if (event.data.properties) {
     event.data.properties.forEach((property) => {
       addMarker(property);
     });
   }
+  wixCodeInitialized = true;
 };
 
 function addMarker(property) {
@@ -75,19 +78,14 @@ function notifyWixCodeAboutLoad() {
 
 function initMap() {
   let styledMapType = new google.maps.StyledMapType(mapStyle, 'greyMap');
-
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 54.397, lng: 25.644},
     scrollwheel: false,
-    zoom: DEFAULT_MAP_ZOOM,
     mapTypeControlOptions: {
-      mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
-        'greyMap']
+      mapTypeIds: ['greyMap']
     }
   });
   map.mapTypes.set('greyMap', styledMapType);
   map.setMapTypeId('greyMap');
-  notifyWixCodeAboutLoad();
 }
 
 let mapStyle = [
