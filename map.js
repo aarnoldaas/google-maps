@@ -50,7 +50,7 @@ function removeMarkers() {
 }
 
 function getTooltip(property) {
-  const content = `<div id="tooltip-content" class="red-background">${property.description}</div>`;
+  const content = `<div>${property.description}</div>`;
   return new google.maps.InfoWindow({
     content
   });
