@@ -60,10 +60,10 @@ function removeMarkers() {
 
 function getTooltip(property) {
   const content = `<div class="property-tooltip-container">
-                     <div class="price">$<span class="price-number">${property.price}</span></div>
-                     <div class="description">${property.title}</div>
-                     <div class="area">${property.area}</div>
-                     <div class="amenities"><div>${property.number_of_bedrooms} Bed</div><div>1 Bath</div></div>
+                     <div class="price">$<span class="price-number">${Number(property.price).toLocaleString()}</span></div>
+                     <div class="description">${property.property_name}</div>
+                     <div class="area">${property.title}</div>
+                     <div class="amenities"><div>${property.number_of_bedrooms} Bed</div><div>${property.number_of_bathrooms} Bath</div></div>
                    </div>`;
   return new google.maps.InfoWindow({
     content
